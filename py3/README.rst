@@ -1,6 +1,6 @@
-======================
-bisos.bx-bases Scripts
-======================
+=========
+bisos.icm
+=========
 
 .. contents::
    :depth: 3
@@ -9,8 +9,8 @@ bisos.bx-bases Scripts
 Overview
 ========
 
-bpo: python library and scripts (Interactive Command Modules – ICM) are
-used to manage abstrations of ByStar Portable Objects.
+BASICS: Modules and facilities that can be used by ICMs and others and
+which do not import icm.
 
 Support
 =======
@@ -33,11 +33,11 @@ Installation
 
 ::
 
-   sudo pip install bisos.bpo
+   sudo pip install bisos.aais
 
 Usage
 =====
 
 ::
 
-   bin/bpoManage.py
+   bin/aaisBpoManage.py

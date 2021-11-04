@@ -5,8 +5,6 @@
 
 import typing
 
-from unisos.icm.icm import cmndExampleMenuChapter
-
 icmInfo: typing.Dict[str, typing.Any] = { 'moduleDescription': ["""
 *       [[elisp:(org-show-subtree)][|=]]  [[elisp:(org-cycle)][| *Description:* | ]]
 **  [[elisp:(org-cycle)][| ]]  [Xref]          :: *[Related/Xrefs:]*  <<Xref-Here->>  -- External Documents  [[elisp:(org-cycle)][| ]]
@@ -203,11 +201,40 @@ def get(
 
     try:
         factValue = eval(f"facts.{factName}")
-    except AttributeError:
-        icm.EH_critical_usageError(f"Invalid factName={factName}")
+    except AttributeError as e:
+        icm.EH_critical_usageError(f"AttributeError -- Invalid factName={factName}")
+        factValue = None
+    except IndexError as e:
+        icm.EH_critical_usageError(f"IndexError -- Invalid factName={factName}")
         factValue = None
 
     return factValue
+
+####+BEGIN: bx:icm:py3:func :funcName "_getWithGetattrUnused" :funcType "" :retType "" :deco "" :argsList "" :comment "Instantiate specified class just once based on args."
+"""
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  Func-      :: /_getWithGetattrUnused/ =Instantiate specified class just once based on args.=  [[elisp:(org-cycle)][| ]]
+"""
+def _getWithGetattrUnused(
+####+END:
+        factName,
+        cache=True,
+):
+    """
+** Get facter as json and convert it to named tuples
+    """
+    facts = getAllAsNamedTuple(cache=cache)
+
+    factNameList = factName.split(".")
+
+    print(factNameList)
+
+    curFacts = facts
+
+    for each in factNameList:
+        curFacts = getattr(curFacts, each)
+        print(curFacts)
+
+    return
 
 ####+BEGIN: bx:icm:py3:func :funcName "getOrDefault" :funcType "" :retType "" :deco "" :argsList "" :comment "Instantiate specified class just once based on args."
 """
