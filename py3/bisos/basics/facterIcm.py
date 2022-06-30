@@ -234,7 +234,7 @@ class factName(icm.Cmnd):
     def cmndDocStr(self):
 ####+END:
         return """
-***** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Returns the full path of the Sr baseDir.
+***** [[elisp:(org-cycle)][| *CmndDesc:* | ]]  Returns factValue for specified factName.
 """
 
 
