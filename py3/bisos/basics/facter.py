@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """\
-* *[Summary]* :: A /library/ Beginning point for development of new ICM oriented libraries.
+* *[Summary]* :: A /library/ to provide a cached and dictionary-like interface to Puppet's facter utility.
 """
 
 import typing
@@ -8,23 +8,23 @@ import typing
 icmInfo: typing.Dict[str, typing.Any] = { 'moduleDescription': ["""
 *       [[elisp:(org-show-subtree)][|=]]  [[elisp:(org-cycle)][| *Description:* | ]]
 **  [[elisp:(org-cycle)][| ]]  [Xref]          :: *[Related/Xrefs:]*  <<Xref-Here->>  -- External Documents  [[elisp:(org-cycle)][| ]]
-
+*** Origins and related work.  https://github.com/knorby/facterpy
 **  [[elisp:(org-cycle)][| ]]   Model and Terminology                                      :Overview:
-*** concept             -- Desctiption of concept
+*** A pure python library for reading in facter facts, caching them and making them available as python namedtuples.
 **      [End-Of-Description]
 """], }
 
 icmInfo['moduleUsage'] = """
 *       [[elisp:(org-show-subtree)][|=]]  [[elisp:(org-cycle)][| *Usage:* | ]]
 
-**      How-Tos:
+**      This is a lower layer library which is then augmented by a CS-Lib and a CS.
 **      [End-Of-Usage]
 """
 
 icmInfo['moduleStatus'] = """
 *       [[elisp:(org-show-subtree)][|=]]  [[elisp:(org-cycle)][| *Status:* | ]]
 **  [[elisp:(org-cycle)][| ]]  [Info]          :: *[Current-Info:]* Status/Maintenance -- General TODO List [[elisp:(org-cycle)][| ]]
-** TODO [[elisp:(org-cycle)][| ]]  Current     :: For now it is an ICM. Turn it into ICM-Lib. [[elisp:(org-cycle)][| ]]
+** TODO [[elisp:(org-cycle)][| ]]  Current     :: Has been minimally tested. [[elisp:(org-cycle)][| ]]
 **      [End-Of-Status]
 """
 
@@ -195,7 +195,8 @@ def get(
         cache=True,
 ):
     """
-** Get facter as json and convert it to named tuples
+** Get facter as json and convert it to named tuples.
+*** Should not use eval here. Use getattr instead.
     """
     facts = getAllAsNamedTuple(cache=cache)
 
@@ -247,7 +248,8 @@ def getOrDefault(
         cache=True,
 ):
     """
-** Get facter as json and convert it to named tuples
+** Get facter as json and convert it to named tuples.
+    *** TODO dont use eval. Use getattr instead.
     """
     facts = getAllAsNamedTuple(cache=cache)
 

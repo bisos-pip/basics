@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """\
-* *[Summary]* :: A /library/ Beginning point for development of new ICM oriented libraries.
+* *[Summary]* :: A /CS-Lib/ Beginning point for development of new ICM oriented libraries.
 """
 
 import typing
@@ -89,10 +89,8 @@ icmInfo['cmndParts'] = "IcmCmndParts[common] IcmCmndParts[param]"
 ####+END:
 
 
-import os
+
 import collections
-import pathlib
-import invoke
 
 ####+BEGIN: bx:dblock:global:file-insert-cond :cond "./blee.el" :file "/bisos/apps/defaults/update/sw/icm/py/importUcfIcmG.py"
 from unisos import ucf
