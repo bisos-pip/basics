@@ -158,7 +158,8 @@ class User(object):
             return
 
         if user == 'root':
-            icm.ANN_here("Running As Root")
+            # icm.TM_here("Running As Root")  # TM_ module, has not been setup yet
+            pass
 
         self.__user = user
 

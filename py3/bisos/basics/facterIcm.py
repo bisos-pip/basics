@@ -154,6 +154,13 @@ class examples_facter(icm.Cmnd):
         cmndArgs = "networking.interfaces.lo.bindings" ; menuItem(verbosity='none')
         cmndArgs = "networking.interfaces.lo.bindings[0].address" ; menuItem(verbosity='none')
 
+        icm.cmndExampleMenuChapter('*No Commands Processor*')
+
+        execLineEx(f"""\
+{G.icmMyName()} networking.interfaces.lo.bindings[0].address\
+"""
+        )
+
         icm.cmndExampleMenuChapter('=facter Examples=')
 
         execLineEx("facter networking")
