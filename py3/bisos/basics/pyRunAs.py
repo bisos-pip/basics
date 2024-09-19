@@ -95,17 +95,18 @@ icmInfo['cmndParts'] = "IcmCmndParts[common] IcmCmndParts[param]"
 """
 ####+END:
 
-####+BEGIN: bx:dblock:global:file-insert-cond :cond "./blee.el" :file "/bisos/apps/defaults/update/sw/icm/py/importUcfIcmG.py"
-from unisos import ucf
-from unisos import icm
 
-icm.unusedSuppressForEval(ucf.__file__)  # in case icm and ucf are not used
+####+BEGIN: b:py3:cs:framework/imports :basedOn "classification"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CsFrmWrk   [[elisp:(outline-show-subtree+toggle)][||]] *Imports* =Based on Classification=cs-mu=
+#+end_org """
+from bisos import b
+from bisos.b import cs
+from bisos.b import b_io
+from bisos.common import csParam
 
-G = icm.IcmGlobalContext()
-# G.icmLibsAppend = __file__
-# G.icmCmndsLibsAppend = __file__
+import collections
 ####+END:
-
 
 import sys, marshal, functools, subprocess
 
@@ -145,16 +146,16 @@ class User(object):
         self.__user = None
 
         if user is None:
-            icm.EH_problem_usageError("User Can't be None")
+            b_io.eh.problem_usageError("User Can't be None")
             return
         elif not isinstance(user, str):
-            icm.EH_problem_usageError("Expected A String")
+            b_io.eh.problem_usageError("Expected A String")
             return
 
         user = user.strip()
 
         if len(user) == 0:
-            icm.EH_problem_usageError("Expected A Non-Blank String")
+            b_io.eh.problem_usageError("Expected A Non-Blank String")
             return
 
         if user == 'root':
@@ -172,7 +173,7 @@ class User(object):
         @functools.wraps(func)
         def inner(*args, **kwargs):
             if not self.user:
-                icm.EH_problem_info("Bad None user.")
+                b_io.eh.problem_usageError("Bad None user.")
                 return None
             proc_args = [
                 "sudo",
@@ -212,10 +213,165 @@ class User(object):
         return inner
 
 
-####+BEGIN: bx:icm:python:section :title "End Of Editable Text"
-"""
-*  [[elisp:(beginning-of-buffer)][Top]] ############## [[elisp:(blee:ppmm:org-mode-toggle)][Nat]] [[elisp:(delete-other-windows)][(1)]]    *End Of Editable Text*  [[elisp:(org-cycle)][| ]]  [[elisp:(org-show-subtree)][|=]]
-"""
+####+BEGIN: b:py3:cs:func/typing :funcName "as_root_writeToFile" :funcType "" :retType "" :deco "default" :argsList ""  :comment "_ALERT_"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-T-       [[elisp:(outline-show-subtree+toggle)][||]] /as_root_writeToFile/  _ALERT_ deco=default  [[elisp:(org-cycle)][| ]]
+#+end_org """
+@cs.track(fnLoc=True, fnEntry=True, fnExit=True)
+def as_root_writeToFile(
+####+END:
+        destFilePath,
+        inBytes,
+):
+    """A warpper to allow for logging, etc. And also to enforce typing."""
+
+    writeToFileAs_root(str(destFilePath), inBytes,)
+
+
+
+####+BEGIN: bx:cs:py3:func :funcName "writeToFileAs_root" :funcType "" :retType "" :deco "User(\"root\")" :argsList ""  :comment "_ALERT_"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-         [[elisp:(outline-show-subtree+toggle)][||]] /writeToFileAs_root/ =_ALERT_= deco=User("root")  [[elisp:(org-cycle)][| ]]
+#+end_org """
+@User("root")
+def writeToFileAs_root(
+####+END:
+        destFilePath: str,
+        inBytes,
+):
+    """Common usage would be @b.pyRunAs.User("root")"""
+    with open(destFilePath, "w") as thisFile:
+        thisFile.write(inBytes + '\n')
+
+####+BEGIN: b:py3:cs:func/typing :funcName "as_root_osSystem" :funcType "" :retType "" :deco "default" :argsList ""  :comment "_ALERT_"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-T-       [[elisp:(outline-show-subtree+toggle)][||]] /as_root_osSystem/  _ALERT_ deco=default  [[elisp:(org-cycle)][| ]]
+#+end_org """
+@cs.track(fnLoc=True, fnEntry=True, fnExit=True)
+def as_root_osSystem(
+####+END:
+        sysCmnd: str,
+):
+    """A warpper to allow for logging, etc. And also to enforce typing."""
+    return (
+        osSystemAs_root(sysCmnd)
+    )
+
+
+####+BEGIN: bx:cs:py3:func :funcName "osSystemAs_root" :funcType "" :retType "" :deco "User(\"root\")" :argsList ""  :comment "_ALERT_"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-         [[elisp:(outline-show-subtree+toggle)][||]] /osSystemAs_root/ =_ALERT_= deco=User("root")  [[elisp:(org-cycle)][| ]]
+#+end_org """
+@User("root")
+def osSystemAs_root(
+####+END:
+        sysCmnd: str,
+):
+    """Common usage would be @b.pyRunAs.User("root")"""
+    import os
+    return os.system(sysCmnd)
+
+
+
+####+BEGIN: b:py3:cs:func/typing :funcName "as_gitSh_writeToFile" :funcType "" :retType "" :deco "default" :argsList ""  :comment "_ALERT_"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-T-       [[elisp:(outline-show-subtree+toggle)][||]] /as_gitSh_writeToFile/  _ALERT_ deco=default  [[elisp:(org-cycle)][| ]]
+#+end_org """
+@cs.track(fnLoc=True, fnEntry=True, fnExit=True)
+def as_gitSh_writeToFile(
+####+END:
+        destFilePath,
+        inBytes,
+):
+    """A warpper to allow for logging, etc."""
+    writeToFileAs_gitSh(destFilePath, inBytes,)
+
+
+####+BEGIN: bx:cs:py3:func :funcName "writeToFileAs_gitSh" :funcType "" :retType "" :deco "User(\"gitSh\")" :argsList ""  :comment "_ALERT_"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-         [[elisp:(outline-show-subtree+toggle)][||]] /writeToFileAs_gitSh/ =_ALERT_= deco=User("gitSh")  [[elisp:(org-cycle)][| ]]
+#+end_org """
+@User("gitSh")
+def writeToFileAs_gitSh(
+####+END:
+        destFilePath,
+        inBytes,
+):
+    """Common usage would be @b.pyRunAs.User("root")"""
+    with open(destFilePath, "w") as thisFile:
+        thisFile.write(inBytes + '\n')
+
+
+####+BEGIN: b:py3:cs:func/typing :funcName "as_root_readFromFile" :funcType "" :retType "" :deco "default" :argsList ""  :comment "_ALERT_"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-T-       [[elisp:(outline-show-subtree+toggle)][||]] /as_root_readFromFile/  _ALERT_ deco=default  [[elisp:(org-cycle)][| ]]
+#+end_org """
+@cs.track(fnLoc=True, fnEntry=True, fnExit=True)
+def as_root_readFromFile(
+####+END:
+        srcFilePath,
+):
+    """A warpper to allow for logging, etc."""
+    return (
+        readFromFileAs_root(str(srcFilePath))
+    )
+
+
+####+BEGIN: bx:cs:py3:func :funcName "readFromFileAs_root" :funcType "" :retType "" :deco "User(\"root\")" :argsList ""  :comment "_ALERT_"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-         [[elisp:(outline-show-subtree+toggle)][||]] /readFromFileAs_root/ =_ALERT_= deco=User("root")  [[elisp:(org-cycle)][| ]]
+#+end_org """
+@User("root")
+def readFromFileAs_root(
+####+END:
+        srcFilePath,
+):
+    """This is a lower layer function. Consider using b.pyRunAs.s_root_readFromFile.
+    Common usage would be b.pyRunAs.readFromFileAs_root("fileName")"""
+    with open(srcFilePath, "r") as thisFile:
+        data = thisFile.read()
+    return data
+
+
+####+BEGIN: b:py3:cs:func/typing :funcName "as_root_deleteFile" :funcType "" :retType "" :deco "default" :argsList ""  :comment "_ALERT_"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-T-       [[elisp:(outline-show-subtree+toggle)][||]] /as_root_deleteFile/  _ALERT_ deco=default  [[elisp:(org-cycle)][| ]]
+#+end_org """
+@cs.track(fnLoc=True, fnEntry=True, fnExit=True)
+def as_root_deleteFile(
+####+END:
+        filePath,
+):
+    """A warpper to allow for logging, etc."""
+    print(f"deleteFileAs_root(filePath={filePath})")
+    return (
+        deleteFileAs_root(str(filePath))
+    )
+
+
+####+BEGIN: bx:cs:py3:func :funcName "deleteFileAs_root" :funcType "" :retType "" :deco "User(\"root\")" :argsList ""  :comment "_ALERT_"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-         [[elisp:(outline-show-subtree+toggle)][||]] /deleteFileAs_root/ =_ALERT_= deco=User("root")  [[elisp:(org-cycle)][| ]]
+#+end_org """
+@User("root")
+def deleteFileAs_root(
+####+END:
+        filePath,
+):
+    """This is a lower layer function. Consider using b.pyRunAs.s_root_readFromFile.
+    Common usage would be b.pyRunAs.readFromFileAs_root("fileName")"""
+
+    import os
+    os.remove(filePath)
+
+    #filePath.unlink()
+
+
+
+####+BEGIN: blee:bxPanel:foldingSection :outLevel 0 :title " ~End Of Editable Text~ "
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*     [[elisp:(outline-show-subtree+toggle)][| _ ~End Of Editable Text~ _: |]]    [[elisp:(org-shifttab)][<)]] E|
+#+end_org """
 ####+END:
 
 ####+BEGIN: bx:dblock:global:file-insert-cond :cond "./blee.el" :file "/bisos/apps/defaults/software/plusOrg/dblock/inserts/endOfFileControls.org"
