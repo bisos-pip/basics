@@ -243,6 +243,35 @@ def writeToFileAs_root(
     with open(destFilePath, "w") as thisFile:
         thisFile.write(inBytes + '\n')
 
+
+####+BEGIN: b:py3:cs:func/typing :funcName "as_root_appendToFile" :funcType "" :retType "" :deco "default" :argsList ""  :comment "_ALERT_"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-T-       [[elisp:(outline-show-subtree+toggle)][||]] /as_root_appendToFile/  _ALERT_ deco=default  [[elisp:(org-cycle)][| ]]
+#+end_org """
+@cs.track(fnLoc=True, fnEntry=True, fnExit=True)
+def as_root_appendToFile(
+####+END:
+        destFilePath,
+        inBytes,
+):
+    """A warpper to allow for logging, etc. And also to enforce typing."""
+
+    appendToFileAs_root(str(destFilePath), inBytes,)
+
+####+BEGIN: bx:cs:py3:func :funcName "appendToFileAs_root" :funcType "" :retType "" :deco "User(\"root\")" :argsList ""  :comment "_ALERT_"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-         [[elisp:(outline-show-subtree+toggle)][||]] /appendToFileAs_root/ =_ALERT_= deco=User("root")  [[elisp:(org-cycle)][| ]]
+#+end_org """
+@User("root")
+def appendToFileAs_root(
+####+END:
+        destFilePath: str,
+        inBytes,
+):
+    """Common usage would be @b.pyRunAs.User("root")"""
+    with open(destFilePath, "a") as thisFile:
+        thisFile.write(inBytes + '\n')
+
 ####+BEGIN: b:py3:cs:func/typing :funcName "as_root_osSystem" :funcType "" :retType "" :deco "default" :argsList ""  :comment "_ALERT_"
 """ #+begin_org
 *  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-T-       [[elisp:(outline-show-subtree+toggle)][||]] /as_root_osSystem/  _ALERT_ deco=default  [[elisp:(org-cycle)][| ]]
@@ -271,35 +300,6 @@ def osSystemAs_root(
     import os
     return os.system(sysCmnd)
 
-
-
-####+BEGIN: b:py3:cs:func/typing :funcName "as_gitSh_writeToFile" :funcType "" :retType "" :deco "default" :argsList ""  :comment "_ALERT_"
-""" #+begin_org
-*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-T-       [[elisp:(outline-show-subtree+toggle)][||]] /as_gitSh_writeToFile/  _ALERT_ deco=default  [[elisp:(org-cycle)][| ]]
-#+end_org """
-@cs.track(fnLoc=True, fnEntry=True, fnExit=True)
-def as_gitSh_writeToFile(
-####+END:
-        destFilePath,
-        inBytes,
-):
-    """A warpper to allow for logging, etc."""
-    writeToFileAs_gitSh(destFilePath, inBytes,)
-
-
-####+BEGIN: bx:cs:py3:func :funcName "writeToFileAs_gitSh" :funcType "" :retType "" :deco "User(\"gitSh\")" :argsList ""  :comment "_ALERT_"
-""" #+begin_org
-*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-         [[elisp:(outline-show-subtree+toggle)][||]] /writeToFileAs_gitSh/ =_ALERT_= deco=User("gitSh")  [[elisp:(org-cycle)][| ]]
-#+end_org """
-@User("gitSh")
-def writeToFileAs_gitSh(
-####+END:
-        destFilePath,
-        inBytes,
-):
-    """Common usage would be @b.pyRunAs.User("root")"""
-    with open(destFilePath, "w") as thisFile:
-        thisFile.write(inBytes + '\n')
 
 
 ####+BEGIN: b:py3:cs:func/typing :funcName "as_root_readFromFile" :funcType "" :retType "" :deco "default" :argsList ""  :comment "_ALERT_"
@@ -366,6 +366,67 @@ def deleteFileAs_root(
 
     #filePath.unlink()
 
+####+BEGIN: b:py3:cs:func/typing :funcName "as_root_renameFile" :funcType "" :retType "" :deco "default" :argsList ""  :comment "_ALERT_"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-T-       [[elisp:(outline-show-subtree+toggle)][||]] /as_root_renameFile/  _ALERT_ deco=default  [[elisp:(org-cycle)][| ]]
+#+end_org """
+@cs.track(fnLoc=True, fnEntry=True, fnExit=True)
+def as_root_renameFile(
+####+END:
+        srcFilePath,
+        destFilePath,
+):
+    """A warpper to allow for logging, etc."""
+    print(f"renameFileAs_root(srcFilePath={srcFilePath}, destFilePath={destFilePath})")
+    return (
+        renameFileAs_root(str(srcFilePath), str(destFilePath))
+    )
+
+
+####+BEGIN: bx:cs:py3:func :funcName "renameFileAs_root" :funcType "" :retType "" :deco "User(\"root\")" :argsList ""  :comment "_ALERT_"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-         [[elisp:(outline-show-subtree+toggle)][||]] /renameFileAs_root/ =_ALERT_= deco=User("root")  [[elisp:(org-cycle)][| ]]
+#+end_org """
+@User("root")
+def renameFileAs_root(
+####+END:
+        srcFilePath,
+        destFilePath,
+):
+    """This is a lower layer function. Consider using b.pyRunAs.s_root_readFromFile.
+    Common usage would be b.pyRunAs.readFromFileAs_root("fileName")"""
+
+    import os
+    os.rename(srcFilePath, destFilePath)
+
+
+####+BEGIN: b:py3:cs:func/typing :funcName "as_gitSh_writeToFile" :funcType "" :retType "" :deco "default" :argsList ""  :comment "_ALERT_"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-T-       [[elisp:(outline-show-subtree+toggle)][||]] /as_gitSh_writeToFile/  _ALERT_ deco=default  [[elisp:(org-cycle)][| ]]
+#+end_org """
+@cs.track(fnLoc=True, fnEntry=True, fnExit=True)
+def as_gitSh_writeToFile(
+####+END:
+        destFilePath,
+        inBytes,
+):
+    """A warpper to allow for logging, etc."""
+    writeToFileAs_gitSh(destFilePath, inBytes,)
+
+
+####+BEGIN: bx:cs:py3:func :funcName "writeToFileAs_gitSh" :funcType "" :retType "" :deco "User(\"gitSh\")" :argsList ""  :comment "_ALERT_"
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  F-         [[elisp:(outline-show-subtree+toggle)][||]] /writeToFileAs_gitSh/ =_ALERT_= deco=User("gitSh")  [[elisp:(org-cycle)][| ]]
+#+end_org """
+@User("gitSh")
+def writeToFileAs_gitSh(
+####+END:
+        destFilePath,
+        inBytes,
+):
+    """Common usage would be @b.pyRunAs.User("root")"""
+    with open(destFilePath, "w") as thisFile:
+        thisFile.write(inBytes + '\n')
 
 
 ####+BEGIN: blee:bxPanel:foldingSection :outLevel 0 :title " ~End Of Editable Text~ "
