@@ -333,7 +333,7 @@ class fileLine(cs.Cmnd):
             lineRegExp = restArgs[1]
             result = basics.FileLine.remove(filePath, lineRegExp, perhapsAsRoot=perhapsAsRoot, perhapsSafeKeep=perhapsSafeKeep,)
         else:
-            b_io.eh.critical_usageError("")
+            b_io.eh.critical_usageError(f"Unknown cmndArg={cmndArg}")
 
         return(cmndOutcome.set(opResults=result))
 
@@ -354,13 +354,13 @@ class fileLine(cs.Cmnd):
             argPosition="0",
             argName="cmndArg",
             argChoices=[],
-            argDescription="Maildrop File Identifier"
+            argDescription="Command which may need restOfArgs"
         )
         cmndArgsSpecDict.argsDictAdd(
             argPosition="1&9999",
             argName="restOfArgs",
             argChoices=[],
-            argDescription="Maildrop File Identifier"
+            argDescription="Rest of args which may be specific to each command"
         )
         return cmndArgsSpecDict
 

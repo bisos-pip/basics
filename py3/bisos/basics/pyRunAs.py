@@ -241,7 +241,10 @@ def writeToFileAs_root(
 ):
     """Common usage would be @b.pyRunAs.User("root")"""
     with open(destFilePath, "w") as thisFile:
-        thisFile.write(inBytes + '\n')
+        if inBytes == "":
+            thisFile.write(inBytes)
+        else:
+            thisFile.write(inBytes + '\n')
 
 
 ####+BEGIN: b:py3:cs:func/typing :funcName "as_root_appendToFile" :funcType "" :retType "" :deco "default" :argsList ""  :comment "_ALERT_"
