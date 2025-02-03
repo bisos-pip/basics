@@ -225,6 +225,9 @@ def as_root_writeToFile(
 ):
     """A warpper to allow for logging, etc. And also to enforce typing."""
 
+    if inBytes is None:
+        raise ValueError('inBytes arg of as_root_writeToFile is None.')
+
     writeToFileAs_root(str(destFilePath), inBytes,)
 
 
@@ -240,8 +243,13 @@ def writeToFileAs_root(
         inBytes,
 ):
     """Common usage would be @b.pyRunAs.User("root")"""
+
+    if inBytes is None:
+        raise ValueError('inBytes arg of writeToFileAs_root is None.')
+
     with open(destFilePath, "w") as thisFile:
         if inBytes == "":
+            print("EH_problem: Empty String inBytes of writeToFileAs_root.")
             thisFile.write(inBytes)
         else:
             thisFile.write(inBytes + '\n')

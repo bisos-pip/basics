@@ -20,7 +20,7 @@ from typing import Union
 import logging
 logger = logging.getLogger(__name__)
 
-def symlink_update(symlink_path: Union[str, Path], target_path: Union[str, Path]) -> None:
+def symlink_update( target_path: str | Path, symlink_path: str | Path,) -> None:
     """
     Update a symlink to point to a new target. If the symlink exists, it will be replaced.
 
