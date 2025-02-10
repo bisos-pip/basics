@@ -101,11 +101,11 @@ import black
 (setq  b:py:cs:csuList
   (list
    "bisos.b.cs.ro"
-   "blee.csPlayer.bleep"
+   "bisos.csPlayer.bleep"
  ))
 #+END_SRC
 #+RESULTS:
-| bisos.b.cs.ro | blee.csPlayer.bleep |
+| bisos.b.cs.ro | bisos.csPlayer.bleep |
 #+end_org """
 
 ####+BEGIN: b:py3:cs:framework/csuListProc :pyImports t :csuImports t :csuParams t
@@ -114,10 +114,10 @@ import black
 #+end_org """
 
 from bisos.b.cs import ro
-from blee.csPlayer import bleep
+from bisos.csPlayer import bleep
 
 
-csuList = [ 'bisos.b.cs.ro', 'blee.csPlayer.bleep', ]
+csuList = [ 'bisos.b.cs.ro', 'bisos.csPlayer.bleep', ]
 
 g_importedCmndsModules = cs.csuList_importedModules(csuList)
 
@@ -168,7 +168,7 @@ class examples(cs.Cmnd):
 
         cs.examples.myName(cs.G.icmMyName(), cs.G.icmMyFullName())
         cs.examples.commonBrief()
-        bleep.examples_icmBasic()
+        bleep.examples_csBasic()
 
         cs.examples.menuChapter('*Convert Python Literal Syntax To Equivalent In Bash*')
         cmnd('stdinToBash')
