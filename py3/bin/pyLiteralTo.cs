@@ -173,8 +173,15 @@ class examples(cs.Cmnd):
         cs.examples.menuChapter('*Convert Python Literal Syntax To Equivalent In Bash*')
         cmnd('stdinToBash')
 
-        print("""echo "{'key1': 'value 1.2AA', 'key2': 'value2' }" | pyLiteralToBash.cs -i stdinToBash""")
-        print("""echo "[{'key1': 'value 1.2AA', 'key2': 'value2' }]" | pyLiteralToBash.cs -i stdinToBash""")
+        print("""echo "{'key1': 'value 1.2AA', 'key2': 'value2' }" | pyLiteralTo.cs -i stdinToBash""")
+        print("""echo "[{'key1': 'value 1.2AA', 'key2': 'value2' }]" | pyLiteralTo.cs -i stdinToBash""")
+
+        cs.examples.menuChapter('*stdinToBlack: Format Python Literal Syntax*')
+        cmnd('stdinToBlack')
+
+        print("""echo "{'key1': 'value 1.2AA', 'key2': 'value2' }" | pyLiteralTo.cs -i stdinToBlack""")
+        print("""echo "[{'key1': 'value 1.2AA', 'key2': 'value2' }]" | pyLiteralTo.cs -i stdinToBlack""")
+
 
         cs.examples.menuChapter('*Bash Examples of Py Input*')
         cmnd('bashDictExample')
