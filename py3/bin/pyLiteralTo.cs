@@ -175,19 +175,58 @@ class examples(cs.Cmnd):
 
         print("""echo "{'key1': 'value 1.2AA', 'key2': 'value2' }" | pyLiteralTo.cs -i stdinToBash""")
         print("""echo "[{'key1': 'value 1.2AA', 'key2': 'value2' }]" | pyLiteralTo.cs -i stdinToBash""")
+        print("""echo "[{'key1': 'value 1.2AA', 'key2': 'value2' }]" | pyLiteralBash.cs""")
 
         cs.examples.menuChapter('*stdinToBlack: Format Python Literal Syntax*')
         cmnd('stdinToBlack')
 
         print("""echo "{'key1': 'value 1.2AA', 'key2': 'value2' }" | pyLiteralTo.cs -i stdinToBlack""")
         print("""echo "[{'key1': 'value 1.2AA', 'key2': 'value2' }]" | pyLiteralTo.cs -i stdinToBlack""")
-
+        print("""echo "[{'key1': 'value 1.2AA', 'key2': 'value2' }]" | pyLiteralBlack.cs""")
 
         cs.examples.menuChapter('*Bash Examples of Py Input*')
         cmnd('bashDictExample')
         cmnd('bashListDictExample')
 
         return(cmndOutcome)
+
+####+BEGIN: b:py3:cs:cmnd/classHead :cmndName "noCmndProcessor" :comment "" :parsMand "" :parsOpt "" :argsMin 0 :argsMax 9999 :pyInv ""
+""" #+begin_org
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CmndSvc-   [[elisp:(outline-show-subtree+toggle)][||]] <<noCmndProcessor>>  =verify= argsMax=9999 ro=cli   [[elisp:(org-cycle)][| ]]
+#+end_org """
+class noCmndProcessor(cs.Cmnd):
+    cmndParamsMandatory = [ ]
+    cmndParamsOptional = [ ]
+    cmndArgsLen = {'Min': 0, 'Max': 9999,}
+
+    @cs.track(fnLoc=True, fnEntry=True, fnExit=True)
+    def cmnd(self,
+             rtInv: cs.RtInvoker,
+             cmndOutcome: b.op.Outcome,
+             argsList: typing.Optional[list[str]]=None,  # CsArgs
+    ) -> b.op.Outcome:
+
+        failed = b_io.eh.badOutcome
+        callParamsDict = {}
+        if self.invocationValidate(rtInv, cmndOutcome, callParamsDict, argsList).isProblematic():
+            return failed(cmndOutcome)
+        cmndArgsSpecDict = self.cmndArgsSpec()
+####+END:
+        cmndOutcome = self.getOpOutcome()
+
+        csMuName = cs.G.icmMyName()
+
+        if "pyLiteralBlack.cs"  ==  csMuName:
+            stdinToBlack().pyWCmnd(cmndOutcome,)
+            print(cmndOutcome.results)
+        elif "pyLiteralBash.cs"  ==  csMuName:
+            stdinToBash().pyWCmnd(cmndOutcome,)
+            print(cmndOutcome.results)
+        else:
+            examples().pyWCmnd(cmndOutcome,)
+
+        return(cmndOutcome)
+
 
 ####+BEGIN: b:py3:cs:orgItem/section :title "Conversion Functions"
 """ #+begin_org
@@ -664,15 +703,15 @@ done
 #+end_org """
 ####+END:
 
-####+BEGIN: b:py3:cs:framework/main :csInfo "csInfo" :noCmndEntry "examples" :extraParamsHook "g_extraParams" :importedCmndsModules "g_importedCmndsModules"
+####+BEGIN: b:py3:cs:framework/main :csInfo "csInfo" :noCmndEntry "noCmndProcessor" :extraParamsHook "g_extraParams" :importedCmndsModules "g_importedCmndsModules"
 """ #+begin_org
-*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CsFrmWrk   [[elisp:(outline-show-subtree+toggle)][||]] =g_csMain= (csInfo, _examples_, g_extraParams, g_importedCmndsModules)
+*  _[[elisp:(blee:menu-sel:outline:popupMenu)][±]]_ _[[elisp:(blee:menu-sel:navigation:popupMenu)][Ξ]]_ [[elisp:(outline-show-branches+toggle)][|=]] [[elisp:(bx:orgm:indirectBufOther)][|>]] *[[elisp:(blee:ppmm:org-mode-toggle)][|N]]*  CsFrmWrk   [[elisp:(outline-show-subtree+toggle)][||]] =g_csMain= (csInfo, _noCmndProcessor_, g_extraParams, g_importedCmndsModules)
 #+end_org """
 
 if __name__ == '__main__':
     cs.main.g_csMain(
         csInfo=csInfo,
-        noCmndEntry=examples,  # specify a Cmnd name
+        noCmndEntry=noCmndProcessor,  # specify a Cmnd name
         extraParamsHook=g_extraParams,
         importedCmndsModules=g_importedCmndsModules,
     )
